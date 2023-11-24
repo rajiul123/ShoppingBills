@@ -4,9 +4,9 @@ import java.text.DecimalFormat;
 class HelloWorld {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        DecimalFormat decimalFormat = new DecimalFormat("BDT #.##");
+        DecimalFormat decimalFormat = new DecimalFormat("USD #.##");
         
-        System.out.print("How many product did you buy: ");
+        System.out.print("How many product(s) bought: ");
         int numOfProduct = sc.nextInt();
         
         double price = 0.0;
@@ -23,8 +23,10 @@ class HelloWorld {
                 numOfProduct--;
             }
         }
+        System.out.print("VAT: ");
+        double VAT = sc.nextDouble();
         System.out.println("Total: " + total);
-        grand_total += total + (total * 0.15);
+        grand_total += total + (total * (VAT/100));
         String autoFormat = decimalFormat.format(grand_total);
         System.out.println("Grand Total after adding VAT: " + autoFormat);
         System.out.print("Please pay the bill: ");
