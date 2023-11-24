@@ -1,0 +1,55 @@
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        DecimalFormat decimalFormat = new DecimalFormat("BDT #.##");
+        
+        System.out.print("How many product did you buy: ");
+        int numOfProduct = sc.nextInt();
+        
+        double price = 0.0;
+        double total = 0.0;
+        double grand_total = 0.0;
+        
+        System.out.println("Enter product prices one by one: ");
+        
+        if (numOfProduct > 1) {
+            while (numOfProduct > 0) {
+                System.out.print("Product: ");
+                price = sc.nextDouble();
+                total += price;
+                numOfProduct--;
+            }
+        }
+        System.out.println("Total: " + total);
+        grand_total += total + (total * 0.15);
+        String autoFormat = decimalFormat.format(grand_total);
+        System.out.println("Grand Total after adding VAT: " + autoFormat);
+        System.out.print("Please pay the bill: ");
+        double bill = sc.nextDouble();
+        
+        if (bill != grand_total) {
+            double rest = 0.0;
+            while (bill < grand_total) {
+                System.out.print("You have to pay more: ");
+                rest = grand_total - bill;
+                String autoFormat_r = decimalFormat.format(rest);
+                System.out.println(autoFormat_r);
+                grand_total = rest;
+                System.out.print("Pay the bill: ");
+                bill = sc.nextDouble();
+            }
+            double change = 0.0;
+            if (bill > grand_total) {
+                System.out.print("Here is your change: ");
+                change = bill - grand_total;
+                String autoFormat_c = decimalFormat.format(change);
+                System.out.println(autoFormat_c);
+            }
+        }
+        
+        System.out.println("Thank you for the shopping!");
+    }
+}
